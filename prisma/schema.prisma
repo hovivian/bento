@@ -9,3 +9,58 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id             Int        @id @default(autoincrement())
+  email          String     @unique
+  name           String
+  passwordHash   String
+  phoneNum       Int
+  address        String
+  savedDishes    SavedDish[]
+  orders         Order[]
+}
+
+model Dish {
+  id             Int        @id @default(autoincrement())
+  name           String
+  stripeId       Int
+  image          String
+  price          Int
+  savedDishes    SavedDish[]
+  orders         Order[]
+  qty            Int        @default(1)
+  category       Category
+}
+
+enum Category {
+SUSHI
+ROLL
+SASHIMI
+}
+
+model SavedDish {
+  id           Int        @id @default(autoincrement())
+  user         User       @relation(fields: [userId], references: [id])
+  userId       Int        @unique
+  dishes       Dish[]
+}
+
+model Order {
+  id                   Int              @id @default(autoincrement())
+  user                 User             @relation(fields: [userId], references: [id])
+  userId               Int              @unique
+  createdAt            DateTime         @default(now())
+  dishes               Dish[]
+  deliveryDate         DateTime
+  deliveryAddress      String
+  recipient            String
+  phoneNum             Int
+  orderStatus          orderStatus
+  total                Int
+}
+
+enum orderStatus {
+  PENDING
+  COMPLETED
+}
