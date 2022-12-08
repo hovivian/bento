@@ -1,2 +1,90 @@
 @import "~bootstrap/scss/bootstrap";
 @import "~react-toastify/dist/ReactToastify";
+
+body {
+  background-color: #EBE0CE;
+  color: #252724;
+}
+
+.navbar {
+  background-color: #EBE0CE;
+}
+
+.nav-link{
+  color: #252724 !important;
+}
+
+.nav-link:hover {
+  color: #EF3C1C !important;
+}
+
+.page-header-bg {
+  background-color: #252724;
+  height: 80px;
+}
+
+.page-header {
+  color:white;
+  margin-left: 90px;
+}
+
+.boxes {
+  background-color: white;
+  border-radius: 20px;
+}
+
+.top-left-boxes, .top-right-box {
+  width: 50%;
+}
+
+.top-right-box {
+  margin-left: 40px;
+  height: 35vh;
+  padding: 15px;
+}
+
+.profile-box {
+  height: 60%;
+  padding: 15px;
+}
+
+.password-box {
+  height: 40%;
+  padding: 15px;
+}
+
+.saved-dishes-box {
+  padding: 15px;
+  height: 40vh;
+}
+
+.profile-page h2 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.home-top {
+  border: 5px solid #252724;
+}
+
+.home {
+  margin: 2% 6%;
+}
+
+#order-btn {
+  background-color: #EF3C1C;
+  color: white;
+  border: none;
+  width: 120px;
+  padding: 8px 20px;
+  margin-top: 20px;
+}
+
+.top-left-boxes {
+  padding-left: 80px;
+}
+
+.features h2 {
+  font-size: 22px;
+}
