@@ -15,7 +15,7 @@ const ProductCard = (props) => {
     event.preventDefault()
 
     setAdding(true)
-    toastId.current = toast.loading('Adding 1 item...')
+    toastId.current = toast.loading('Adding dish...')
 
     if (typeof props.onClickAdd === 'function') {
       props.onClickAdd()
@@ -66,14 +66,13 @@ const ProductCard = (props) => {
           <div>
             <p className="text-gray-500">Price</p>
             <p className="text-lg font-semibold">
-              {formatCurrency(props.price, props.currency)}
+              {props.price}
             </p>
           </div>
 
           <button
             type="button"
             onClick={handleOnAddToCart}
-            disabled={adding || props.disabled}
             className={`border rounded-lg py-1 px-4 hover:bg-rose-500 hover:border-rose-500 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
               adding
                 ? 'disabled:bg-rose-500 disabled:border-rose-500 disabled:text-white'
