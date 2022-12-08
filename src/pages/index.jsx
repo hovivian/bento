@@ -38,7 +38,7 @@ export default function Home() {
         </IconContext.Provider>
       </div>
       <div className="mt-5">
-        <h2 className="text-center">Favorite Dishes</h2>
+        <h2 className="text-center">Hot Picks</h2>
       </div>
     </div>
   )
