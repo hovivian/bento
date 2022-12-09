@@ -6,6 +6,7 @@ import { useSession } from 'next-auth/react'
 
 import appWithSession from '@/hoc/appWithSession'
 import CompsLayoutsNavbar from '@/components/layouts/Navbar'
+import CartProvider from '../../context/CartContext'
 
 function MyApp({ Component, pageProps }) {
   const { status, data: user } = useSession()
@@ -17,7 +18,7 @@ function MyApp({ Component, pageProps }) {
   }
 
   return (
-    <>
+    <CartProvider>
       <CompsLayoutsNavbar />
       <Component {...pageProps} />
       <ToastContainer
@@ -31,7 +32,7 @@ function MyApp({ Component, pageProps }) {
         draggable
         pauseOnHover
       />
-    </>
+    </CartProvider>
   )
 }
 
