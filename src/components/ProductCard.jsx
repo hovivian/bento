@@ -1,22 +1,33 @@
+/* eslint-disable camelcase */
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect } from 'react'
 import { RiHeartLine } from 'react-icons/ri'
 import { IconContext } from 'react-icons'
+import { toast } from 'react-toastify'
 import { useCart } from '../../context/CartContext'
 
 const ProductCard = ({ price }) => {
   const { items, addItem } = useCart()
   const [error, setError] = useState('')
-  const { product, unitAmount } = price
+  const { product, unit_amount } = price
 
   const addItemToCart = (price) => {
     const found = items.find((p) => p.id === price.id)
     if (found) {
-      setError('Item has been added!')
+      toast.success('item has been added!')
       return
     }
     addItem(price)
   }
+
+  // const saveToFavorite = (product) => {
+  //   const found = items.find((p) => p.id === price.id)
+  //   if (found) {
+  //     toast.success('item has been saved!')
+  //     return
+  //   }
+  //   saveItem(price)
+  // }
 
   useEffect(() => {
     const timeout = setTimeout(() => setError(''), 3000)
@@ -38,21 +49,20 @@ const ProductCard = ({ price }) => {
           <div className="productPrice">
             <div
               aria-hidden="true"
-              className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black opacity-50"
             />
             <p className="relative text-lg font-semibold">
-              {(unitAmount / 100).toLocaleString('en-CA', {
+              {(unit_amount / 100).toLocaleString('en-hk', {
                 style: 'currency',
-                currency: 'HKD'
+                currency: 'hkd'
               })}
             </p>
           </div>
         </div>
         <IconContext.Provider value={{ size: 30 }}>
-          <div className="productBtn d-flex flex-column justify-content-between align-items-center">
+          <div className="productBtn d-flex flex-column align-items-center">
             <button
-              onClick={() => addItemToCart(price)}
-              className="btn text-center"
+              onClick={() => saveToFavorite(product)}
+              className="btn text-center favoriteBtn"
               type="button"
             >
               <RiHeartLine />

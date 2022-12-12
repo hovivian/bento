@@ -1,4 +1,8 @@
+import { useSession } from 'next-auth/react'
+
 export default function Profile() {
+  const { data } = useSession()
+
   return (
     <>
       <div className="page-header-bg"><h1 className="my-3 p-3 page-header"><h2>Profile</h2></h1></div>

@@ -3,9 +3,11 @@ import { BsFillCreditCard2BackFill } from 'react-icons/bs'
 import { ImTruck } from 'react-icons/im'
 import { SiHellofresh } from 'react-icons/si'
 import { IconContext } from 'react-icons'
+import Stripe from 'stripe'
 import kv from '../../public/assets/images/kv.png'
+import ProductCard from '../components/ProductCard'
 
-export default function Home() {
+export default function Home({ prices = [] }) {
   return (
     <div className="home">
       <div className="home-top d-flex">
@@ -39,7 +41,27 @@ export default function Home() {
       </div>
       <div className="mt-5">
         <h2 className="text-center">Hot Picks</h2>
+        <div className="d-flex flex-wrap justify-content-around">
+          {prices.map((price) => (
+            <ProductCard key={price.id} price={price} />
+          ))}
+        </div>
       </div>
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+  const { data: prices } = await stripe.prices.list({
+    active: true,
+    limit: 4,
+    expand: ['data.product']
+  })
+
+  return {
+    props: {
+      prices
+    }
+  }
 }

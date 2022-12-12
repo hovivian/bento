@@ -5,9 +5,12 @@ import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Image from 'next/image'
 import { BsGlobe, BsFillBasketFill } from 'react-icons/bs'
+import { useSession, signIn, signOut } from 'next-auth/react'
 import logo from '../../../public/assets/images/logo.png'
 
 export default function CompsLayoutsNavbar() {
+  const { data: session } = useSession()
+
   return (
     <Navbar className="navbar mt-3" expand="lg">
       <Container>
@@ -22,8 +25,13 @@ export default function CompsLayoutsNavbar() {
             <Nav.Link as={Link} href="/menu"><a className="nav-link">MENU</a></Nav.Link>
             <NavDropdown title="PROFILE" id="basic-nav-dropdown" className="">
               <NavDropdown.Item><Nav.Link as={Link} href="/profile"><a className="nav-link">PROFILE</a></Nav.Link></NavDropdown.Item>
-              <NavDropdown.Item><Nav.Link as={Link} href="/login"><a className="nav-link">LOGIN</a></Nav.Link></NavDropdown.Item>
-              <NavDropdown.Item><Nav.Link as={Link} href="/signup"><a className="nav-link">SIGNUP</a></Nav.Link></NavDropdown.Item>
+              {
+              session ? (
+                <NavDropdown.Item><Nav.Link onClick={() => signOut({ callbackUrl: '/' })}>Sign Out</Nav.Link></NavDropdown.Item>
+              ) : (
+                <NavDropdown.Item><Nav.Link onClick={() => signIn()}>Sign In</Nav.Link></NavDropdown.Item>
+              )
+            }
             </NavDropdown>
             <Nav.Link as={Link} href="/cart"><a className="nav-link d-flex align-items-center"><BsFillBasketFill />&nbsp;&nbsp;CART</a></Nav.Link>
           </Nav>
