@@ -1,24 +1,33 @@
+/* eslint-disable quotes */
 /* eslint-disable camelcase */
 /* eslint-disable @next/next/no-img-element */
-import { useState, useEffect } from 'react'
-import { RiHeartLine } from 'react-icons/ri'
-import { IconContext } from 'react-icons'
-import { toast } from 'react-toastify'
-import { useCart } from '../../context/CartContext'
+import { useState, useEffect } from "react";
+import { RiHeartLine } from "react-icons/ri";
+import { IconContext } from "react-icons";
+import { toast } from "react-toastify";
+import { useCart } from "../../context/CartProvider";
 
 const ProductCard = ({ price }) => {
-  const { items, addItem } = useCart()
-  const [error, setError] = useState('')
-  const { product, unit_amount } = price
+  const { items, addItem } = useCart();
+  const [error, setError] = useState("");
+  const { product, unit_amount } = price;
 
-  const addItemToCart = (price) => {
-    const found = items.find((p) => p.id === price.id)
+  const initialCartValues = {
+    cartDetails: {},
+    cartCount: 0,
+    totalPrice: 0,
+  };
+
+  const addItemToCart = (state = price, quantity = 0) => {
+    if (quantity <= 0 || !price) return state;
+
+    const found = items.find((p) => p.id === price.id);
     if (found) {
-      toast.success('item has been added!')
-      return
+      found.quantity += quantity;
     }
-    addItem(price)
-  }
+    toast.success("item has been added!");
+    addItem(price);
+  };
 
   // const saveToFavorite = (product) => {
   //   const found = items.find((p) => p.id === price.id)
@@ -30,30 +39,24 @@ const ProductCard = ({ price }) => {
   // }
 
   useEffect(() => {
-    const timeout = setTimeout(() => setError(''), 3000)
-    return () => clearTimeout(timeout)
-  }, [error])
+    const timeout = setTimeout(() => setError(""), 3000);
+    return () => clearTimeout(timeout);
+  }, [error]);
 
   return (
     <div className="products m-1">
-      <img
-        src={product.images[0]}
-        alt={product.name}
-        className="productImg"
-      />
+      <img src={product.images[0]} alt={product.name} className="productImg" />
       <div className="productCard bg-white p-3 d-flex justify-content-around">
         <div className="productCard-left d-flex flex-column w-75">
           <div className="productName mt-4">
             <h3>{product.name}</h3>
           </div>
           <div className="productPrice">
-            <div
-              aria-hidden="true"
-            />
+            <div aria-hidden="true" />
             <p className="relative text-lg font-semibold">
-              {(unit_amount / 100).toLocaleString('en-hk', {
-                style: 'currency',
-                currency: 'hkd'
+              {(unit_amount / 100).toLocaleString("en-hk", {
+                style: "currency",
+                currency: "hkd",
               })}
             </p>
           </div>
@@ -69,7 +72,7 @@ const ProductCard = ({ price }) => {
             </button>
             <button
               onClick={() => addItemToCart(price)}
-              className="btn addToCartBtn text-center"
+              className="addToCartBtn text-center"
               type="button"
             >
               +
@@ -79,7 +82,7 @@ const ProductCard = ({ price }) => {
         </IconContext.Provider>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductCard
+export default ProductCard;

@@ -1,2 +1,2 @@
-# Bento
--A Japanese food ordering app
+# obento
+- A Japanese food ordering app

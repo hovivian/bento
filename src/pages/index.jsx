@@ -4,6 +4,7 @@ import { ImTruck } from 'react-icons/im'
 import { SiHellofresh } from 'react-icons/si'
 import { IconContext } from 'react-icons'
 import Stripe from 'stripe'
+import Link from 'next/link'
 import kv from '../../public/assets/images/kv.png'
 import ProductCard from '../components/ProductCard'
 
@@ -14,7 +15,7 @@ export default function Home({ prices = [] }) {
         <div className="d-flex flex-column w-50 justify-content-center top-left-boxes">
           <h1>Enjoy quality <span>sushi</span></h1>
           <h1> delivered at your door!</h1>
-          <button id="order-btn" type="button">Order Now</button>
+          <button id="order-btn" type="button"><Link href="/menu">Order Now</Link></button>
         </div>
         <div className="w-50 d-flex justify-content-end">
           <Image src={kv} width="600" height="400" alt="kv" />

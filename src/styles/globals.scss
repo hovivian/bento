@@ -1,5 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;700&display=swap');
 @import "~bootstrap/scss/bootstrap";
 @import "~react-toastify/dist/ReactToastify";
+
+* > * {
+  font-family: 'Poppins', sans-serif;
+}
 
 body {
   background-color: #EBE0CE;
@@ -74,11 +79,15 @@ body {
 
 #order-btn {
   background-color: #EF3C1C;
-  color: white;
   border: none;
   width: 120px;
   padding: 8px 20px;
   margin-top: 20px;
+}
+
+#order-btn a{
+  color: white;
+  text-decoration: none;
 }
 
 .top-left-boxes {
@@ -89,7 +98,7 @@ body {
   font-size: 22px;
 }
 
-#login-form {
+#signup-form {
   background-color: white;
   border-radius: 20px;
   align-items: center;
@@ -111,7 +120,6 @@ body {
 .productCard {
   border-radius: 10px;
 }
-
 .productImg {
   position: relative;
   z-index: 10;
@@ -119,59 +127,204 @@ body {
   left: 25px;
   width: 90%;
   height: auto;
-  }
+}
 
-  .productName h3 {
-    font-size: 16px;
-    font-weight: bold;
-  }
+.productName h3 {
+  font-size: 16px;
+  font-weight: bold;
+}
 
-  .products {
-    width: 20%;
-  }
+.products {
+  width: 20%;
+}
 
-  .addToCartBtn {
-    font-size: 20px;
-    color: white;
-    background-color:#252724;
-    border-radius: 50%;
-    height: 40px;
-    width: 40px;
-    line-height: 0;
-    padding-bottom: 10px;
-    position: relative;
-    z-index: 10;
-    left: 10px;
-    top: 10px;
-  }
-
-  .favoriteBtn {
-    position: relative;
-    top: -10px;
-    z-index: 10;
-    left: 10px;
-  }
-
-  .categories button {
-    background-color:#252724;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    width: 120px;
-    height: 40px;
-    padding: 8px 20px;
-  }
-
-  .categories button:active {
-    background-color:#EF3C1C;
-  }
-
-  #searchBar {
+.addToCartBtn {
   all: unset;
-	background: white;
-	width: 250px;
+  font-size: 20px;
+  color: white;
+  background-color:#252724;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  line-height: 1.25;
+  position: relative;
+  z-index: 10;
+  left: 10px;
+  top: 10px;
+}
+
+.addToCartBtn:active {
+  font-size: 25px;
+  line-height: 1;
+  background-color:#252724;
+}
+
+.favoriteBtn {
+  position: relative;
+  top: -10px;
+  z-index: 10;
+  left: 10px;
+}
+
+.categories button {
+  background-color:#252724;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  width: 120px;
+  height: 40px;
+  padding: 8px 20px;
+}
+
+.categories button:focus {
+  background-color:#EF3C1C;
+}
+
+#searchBar {
+  all: unset;
+  background: white;
+  width: 250px;
   height: 40px;
   border-radius: 30px;
   padding: 0 20px;
-	color:#252724;
-  }
+  color:#252724;
+}
+
+.cartBtn {
+  all: unset;
+  cursor: pointer;
+
+}
+
+.cartBtn > span {
+  font-size: 15px;
+  text-align: justify;
+}
+
+#dialogShow {
+  position: relative;
+  z-index: 10;
+}
+
+#cart {
+  overflow: hidden;
+  position: fixed;
+}
+
+#cartHead {
+  overflow: hidden;
+  position: absolute;
+}
+
+#cartContent {
+  display: flex;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  padding-left: 2.5rem;
+  max-width: 100%;
+  pointer-events: none;
+}
+
+#diagoPanel {
+  width: 100vw;
+  max-width: 28rem;
+  pointer-events: auto;
+}
+
+#panelContent {
+  display: flex;
+  overflow-y: scroll;
+  background-color: #ffffff;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+#panelContentBody {
+  display: flex;
+  overflow-y: scroll;
+  flex-direction: column;
+  height: 100%;
+}
+
+#dialogTitle {
+  color: #111827;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+  padding: 15px;
+}
+
+#closeBtn {
+  padding: 15px;
+}
+
+.cartItem {
+  border: 1px solid #d2d2d2;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+}
+
+.itemImg {
+  overflow: hidden;
+  width: 6rem;
+  height: 6rem;
+}
+
+.itemImgSrc {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.removeBtn {
+  all: unset;
+  cursor: pointer;
+  color:#EF3C1C;
+  font-size: 14px;
+}
+
+.itemTitle {
+  font-size: 17px;
+}
+
+// .flowRoot {
+//   display: flow-root;
+// }
+
+.subtotal {
+  padding: 1rem  1.5rem;
+  border-top-width: 1px;
+  border-color: #E5E7EB;
+}
+
+#checkoutBtn {
+  text-decoration: none;
+  color: white;
+  background-color: #252724;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#checkoutBtn:hover {
+  background-color: black;
+}
+
+#continueBtn {
+  all: unset;
+  color:#252724;
+  text-decoration: underline;
+}
+
+.pagination a {
+  color:#111827;
+}
+
+.pagination a:focus {
+  color:#EF3C1C;
+  text-decoration: underline;
+}

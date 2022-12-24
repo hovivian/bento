@@ -7,9 +7,11 @@ import Image from 'next/image'
 import { BsGlobe, BsFillBasketFill } from 'react-icons/bs'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import logo from '../../../public/assets/images/logo.png'
+import { useCart } from '../../../context/CartProvider'
 
-export default function CompsLayoutsNavbar() {
+export default function CompsLayoutsNavbar({ setCartSliderIsOpen }) {
   const { data: session } = useSession()
+  const { items } = useCart()
 
   return (
     <Navbar className="navbar mt-3" expand="lg">
@@ -29,11 +31,19 @@ export default function CompsLayoutsNavbar() {
               session ? (
                 <NavDropdown.Item><Nav.Link onClick={() => signOut({ callbackUrl: '/' })}>Sign Out</Nav.Link></NavDropdown.Item>
               ) : (
-                <NavDropdown.Item><Nav.Link onClick={() => signIn()}>Sign In</Nav.Link></NavDropdown.Item>
+                <NavDropdown.Item><Nav.Link onClick={() => signIn()}>SIGN IN</Nav.Link></NavDropdown.Item>
               )
             }
             </NavDropdown>
-            <Nav.Link as={Link} href="/cart"><a className="nav-link d-flex align-items-center"><BsFillBasketFill />&nbsp;&nbsp;CART</a></Nav.Link>
+            <div className="d-flex">
+              <button
+                type="button"
+                className="cartBtn"
+                onClick={() => setCartSliderIsOpen((open) => !open)}
+              >
+                <BsFillBasketFill /> <span>( {items.length} )</span>
+              </button>
+            </div>
           </Nav>
         </Navbar.Collapse>
       </Container>
